@@ -142,6 +142,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     val = int(val)
                 setattr(new_instance, key, val)
+            new_instance.save()  # save new instance
         else:
             return
 
