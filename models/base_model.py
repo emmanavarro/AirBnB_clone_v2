@@ -23,6 +23,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            # self.save()
 
         else:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
@@ -51,11 +52,12 @@ class BaseModel:
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
 
-        if '_sa_instance_state' in dictionary:  # deletes key if exists
-            del dictionary['_sa_instance_state']
-
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
+
+        if '_sa_instance_state' in dictionary:  # deletes key if exists
+            dictionary.pop('_sa_instance_state')
+
         return dictionary
 
     def delete(self):
