@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ New engine: DBStorage  """
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.user import User
@@ -8,8 +10,6 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from sqalchemy import (create_engine)
-from sqlalchemy.orm import sessionmaker, scoped_session
 
 
 class DBStorage:
@@ -25,7 +25,6 @@ class DBStorage:
                                       pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
-            # create_all(engine) <-- necessary?
 
     def all(self, cls=None):
         """
@@ -35,19 +34,16 @@ class DBStorage:
         cls_dict = {}  # class dictionary
 
         if cls is None:
-            list_class = ['User', 'State', 'City', 'Amenity',
-                          'Place', 'Review']
-            for cl in list_class:
-                query = self.__session.query(eval(cl))
-                for obj in query:
-                    key = "{}.{}".format(type(obj).__name__, obj.id)
-                    cls_dict[key] = obj
-        else:
-            query = self.session.query(cls).all()
+            query = self.__session.query(User, State, City, Amenity,
+                                         Place, Review).all()
             for obj in query:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 cls_dict[key] = obj
-
+        else:
+            query = self.__session.query(cls).all()
+            for obj in query:
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                cls_dict[key] = obj
         return (cls_dict)  # return dictionary of all class objects
 
     def new(self, obj):
@@ -71,8 +67,8 @@ class DBStorage:
         # create all tables
         Base.metadata.create_all(self.__engine)
         # create current database session and make sure Session is thread-safe
-        Session = scope_session(sessionmaker(bind=self.__engine,
-                                             expire_on_commit=False))
+        Session = scoped_session(sessionmaker(bind=self.__engine,
+                                              expire_on_commit=False))
         self.__session = Session()
 
     def close(self):
