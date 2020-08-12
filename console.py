@@ -135,9 +135,9 @@ class HBNBCommand(cmd.Cmd):
             for param in all_param:
                 key = param.split("=")[0]
                 value = param.split("=")[1]
-                if "\"" in value:
-                    if "\"" in value[1:-1]:  # scape double quote (")
-                        value = value[1:-1].replace("\"", '')
+                if "\"" in value[0]:
+                    # if "\"" in value[1:-1]:  # escape double quote (")
+                    # value = value[1:-1].replace("\"", '')
                     value = str(value.replace("\"", ''))
                     value = str(value.replace("_", ' '))
                 elif "." in value:
@@ -145,11 +145,11 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = int(value)
                 setattr(new_instance, key, value)  # Update new_instance
-            new_instance.save()  # save new instance
 
-        storage.save()
+        new_instance.save()  # save new instance
+        # storage.save()
         print(new_instance.id)
-        storage.save()
+        # storage.save()
 
     def help_create(self):
         """ Help information for the create method """
