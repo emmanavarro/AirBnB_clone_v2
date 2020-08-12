@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
                 value = param.split("=")[1]
                 if "\"" in value:
                     if "\"" in value[1:-1]:  # scape double quote (")
-                        value = value[1:-1].replace("\"", ' ')
+                        value = value[1:-1].replace("\"", '')
                     value = str(value.replace("\"", ''))
                     value = str(value.replace("_", ' '))
                 elif "." in value:
