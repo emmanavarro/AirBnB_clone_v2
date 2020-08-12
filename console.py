@@ -130,21 +130,22 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[c_name]()
 
         if len(list_arg) >= 2:
-            for parameter in list_arg[1:]:
-                key = parameter.split("=")[0]  # save parameter name
-                # save value without double quote
-                val = parameter.split("=")[1]  # save parameter value
-                if "\"" in val:
-                    val = val.replace('\"', '')  # save string without "
-                    val = val.replace("_", ' ')  # save string without "_"
-                elif "." in val:
-                    val = float(val)
+            all_param = list_arg[1:]
+            # dict_param = {}
+            for param in all_param:
+                key = param.split("=")[0]
+                value = param.split("=")[1]
+                if "\"" in value:
+                    if "\"" in value[1:-1]:  # scape double quote (")
+                        value = value[1:-1].replace("\"", ' ')
+                    value = str(value.replace("\"", ''))
+                    value = str(value.replace("_", ' '))
+                elif "." in value:
+                    value = float(value)
                 else:
-                    val = int(val)
-                setattr(new_instance, key, val)
+                    value = int(value)
+                setattr(new_instance, key, value)  # Update new_instance
             new_instance.save()  # save new instance
-        else:
-            return
 
         storage.save()
         print(new_instance.id)
