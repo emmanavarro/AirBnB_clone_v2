@@ -1,23 +1,23 @@
 #!/usr/bin/python3
 """ Test case for console """
-import unittest
-from unittest import TestCase
-from unittest.mock import patch
-import pep8
-from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
-from models.__init__ import storage
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 import os
 import sys
+import pep8
 import console
-from console import HBNBCommand
+import MySQLdb
+import unittest
 from io import StringIO
+from models.user import User
+from models.city import City
+from models.place import Place
+from models.state import State
+from unittest.mock import patch
+from console import HBNBCommand
+from models.review import Review
+from models.amenity import Amenity
+from models.__init__ import storage
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestPep8B(unittest.TestCase):
