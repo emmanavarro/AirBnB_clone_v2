@@ -50,7 +50,6 @@ class TestDocsB(unittest.TestCase):
 class Test_DB_Storage(unittest.TestCase):
     """ Class to test the DB storage method """
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
-
     def setUp(self):
         """ Set up test environment """
         self.instan = DBStorage()  # create DBStorage instance
