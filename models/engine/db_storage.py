@@ -37,13 +37,13 @@ class DBStorage:
 
         if cls is None:
             query = self.__session.query(User, State, City, Amenity,
-                                         Place, Review).all()
+                                         Place, Review)
             for obj in query:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 cls_dict[key] = obj
             return cls_dict  # return dictionary of all class objects
         else:
-            query = self.__session.query(cls).all()
+            query = self.__session.query(cls)
             for obj in query:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 cls_dict[key] = obj
