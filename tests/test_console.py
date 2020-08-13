@@ -59,7 +59,29 @@ class ConsoleTestClass(unittest.TestCase):
         """ Clean all test case """
         pass
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file')
     def test_create(self):
+        """ Test Case to create a object from a class """
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            self.instan.onecmd('create')
+            self.assertEqual('** class name missing **\n', test_cmd.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            self.instan.onecmd('create Class')
+            self.assertEqual('** class doesn\'t exist **\n',
+                             test_cmd.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            self.instan.onecmd('create User')
+            self.assertTrue(len(test_cmd.getvalue()) > 0)
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            self.instan.onecmd('all State')
+            self.assertTrue(len(test_cmd.getvalue()) > 0)
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
+    def test_create_filestorage(self):
         """ Test Case to create a object from a class """
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
