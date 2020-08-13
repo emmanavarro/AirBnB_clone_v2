@@ -15,6 +15,7 @@ from models.base_model import BaseModel
 from models.engine.db_storage import DBStorage
 import os
 import sys
+import MySQLdb
 from io import StringIO
 
 
@@ -48,6 +49,7 @@ class TestDocsB(unittest.TestCase):
 
 class Test_DB_Storage(unittest.TestCase):
     """ Class to test the DB storage method """
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
 
     def setUp(self):
         """ Set up test environment """
@@ -144,3 +146,7 @@ class Test_DB_Storage(unittest.TestCase):
         print(type(storage))
         self.assertEqual(type(storage), FileStorage) """
         pass
+
+
+if __name__ == "__main__":
+    unittest.main()
