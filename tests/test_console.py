@@ -59,7 +59,8 @@ class ConsoleTestClass(unittest.TestCase):
         """ Clean all test case """
         pass
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file')
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                     'environment = file')
     def test_create(self):
         """ Test Case to create a object from a class """
 
@@ -80,7 +81,8 @@ class ConsoleTestClass(unittest.TestCase):
             self.instan.onecmd('all State')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
+                     'environment = db')
     def test_create_filestorage(self):
         """ Test Case to create a object from a class """
 
