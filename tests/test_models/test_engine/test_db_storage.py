@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module for testing file storage"""
+""" Module for testing DB storage"""
 import pep8
 import unittest
 from unittest import TestCase
@@ -21,22 +21,6 @@ import MySQLdb
 from io import StringIO
 
 
-class TestDocsB(unittest.TestCase):
-    """ check for documentation """
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(db_storage.__doc__) > 0)
-
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(DBStorage.__doc__) > 0)
-
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(DBStorage):
-            self.assertTrue(len(func.__doc__) > 0)
-
-
 class Test_DB_Storage(unittest.TestCase):
     """ Class to test the DB storage method """
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
@@ -51,6 +35,20 @@ class Test_DB_Storage(unittest.TestCase):
         result = style.check_files([file1, file2])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warning).")
+
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(db_storage.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(DBStorage.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(DBStorage):
+            self.assertTrue(len(func.__doc__) > 0)
+
 
 if __name__ == "__main__":
     unittest.main()
