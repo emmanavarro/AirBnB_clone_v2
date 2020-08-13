@@ -1,29 +1,22 @@
 #!/usr/bin/python3
 """ Module for testing DB storage"""
-import pep8
-import unittest
-from unittest import TestCase
-from unittest.mock import patch
-import models
-from models.engine import db_storage
-from models.__init__ import storage
-from models.user import User
-from models.city import City
-from models.place import Place
-from models.state import State
-from models.review import Review
-from models.amenity import Amenity
-from models.base_model import BaseModel
-from models.engine.db_storage import DBStorage
 import os
 import sys
+import pep8
+import models
 import MySQLdb
+import unittest
 from io import StringIO
+from unittest.mock import patch
+from models.__init__ import storage
+from models.engine import db_storage
+from models.engine.db_storage import DBStorage
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'environment = db')
 class Test_DB_Storage(unittest.TestCase):
     """ Class to test the DB storage method """
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'db')
+
     def test_pep8(self):
         """
         * Test pep8 style validation
