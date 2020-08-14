@@ -48,8 +48,6 @@ class TestDocsB(unittest.TestCase):
             self.assertTrue(len(func.__doc__) > 0)
 
 
-@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                 'environment = file')
 class ConsoleTestClass(unittest.TestCase):
     """ Class to test case of input in console """
 
@@ -61,6 +59,8 @@ class ConsoleTestClass(unittest.TestCase):
         """ Clean all test case """
         pass
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                     'environment = file')
     def test_create(self):
         """ Test Case to create a object from a class """
 
@@ -75,106 +75,6 @@ class ConsoleTestClass(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
             self.instan.onecmd('create State name="New_York"')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('all State')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-    def test_executable_file(self):
-        """ Check if file have permissions to execute """""
-        # Check for read access
-        is_read_true = os.access('console.py', os.R_OK)
-        self.assertTrue(is_read_true)
-        # Check for write access
-        is_write_true = os.access('console.py', os.W_OK)
-        self.assertTrue(is_write_true)
-        # Check for execution access
-        is_exec_true = os.access('console.py', os.X_OK)
-        self.assertTrue(is_exec_true)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     'environment = db')
-    def test_create_filestorage(self):
-        """ Test Case to create a object from a class """
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create')
-            self.assertEqual('** class name missing **\n', test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create Class')
-            self.assertEqual('** class doesn\'t exist **\n',
-                             test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create State name="Texas"')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('all State')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-
-@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                 'environment = file')
-class ConsoleTestClass(unittest.TestCase):
-    """ Class to test case of input in console """
-
-    def setUp(self):
-        """ create instance global """
-        self.instan = HBNBCommand()
-
-    def tearDown(self):
-        """ Clean all test case """
-        pass
-
-    def test_create(self):
-        """ Test Case to create a object from a class """
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create')
-            self.assertEqual('** class name missing **\n', test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create Class')
-            self.assertEqual('** class doesn\'t exist **\n',
-                             test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create State name="New_York"')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('all State')
-            self.assertTrue(len(test_cmd.getvalue()) > 0)
-
-    def test_executable_file(self):
-        """ Check if file have permissions to execute """""
-        # Check for read access
-        is_read_true = os.access('console.py', os.R_OK)
-        self.assertTrue(is_read_true)
-        # Check for write access
-        is_write_true = os.access('console.py', os.W_OK)
-        self.assertTrue(is_write_true)
-        # Check for execution access
-        is_exec_true = os.access('console.py', os.X_OK)
-        self.assertTrue(is_exec_true)
-
-    def test_create_filestorage(self):
-        """ Test Case to create a object from a class """
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create')
-            self.assertEqual('** class name missing **\n', test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create Class')
-            self.assertEqual('** class doesn\'t exist **\n',
-                             test_cmd.getvalue())
-
-        with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create State name="Texas"')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
