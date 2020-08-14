@@ -81,6 +81,18 @@ class ConsoleTestClass(unittest.TestCase):
             self.instan.onecmd('all State')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
+    def test_executable_file(self):
+        """ Check if file have permissions to execute """""
+        # Check for read access
+        is_read_true = os.access('console.py', os.R_OK)
+        self.assertTrue(is_read_true)
+        # Check for write access
+        is_write_true = os.access('console.py', os.W_OK)
+        self.assertTrue(is_write_true)
+        # Check for execution access
+        is_exec_true = os.access('console.py', os.X_OK)
+        self.assertTrue(is_exec_true)
+
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
                      'environment = db')
     def test_create_filestorage(self):
