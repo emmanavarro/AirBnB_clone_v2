@@ -8,6 +8,8 @@ import json
 import os
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                 'environment = file')
 class test_basemodel(unittest.TestCase):
     """ """
 
@@ -59,8 +61,12 @@ class test_basemodel(unittest.TestCase):
     def test_str(self):
         """ """
         i = self.value()
+        dictionary = {}
+        dictionary.update(i.__dict__)
+        if "_sa_instance_state" in dictionary:
+            del dictionary["_sa_instance_state"]
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         i.__dict__))
+                         dictionary))
 
     def test_todict(self):
         """ """
@@ -77,8 +83,8 @@ class test_basemodel(unittest.TestCase):
     def test_kwargs_one(self):
         """ """
         n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
+        new = self.value(**n)
+        self.assertTrue("Name" in new.__dict__)
 
     def test_id(self):
         """ """
