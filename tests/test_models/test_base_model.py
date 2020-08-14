@@ -12,6 +12,7 @@ import os
                  'environment = file')
 class test_basemodel(unittest.TestCase):
     """ """
+    maxDiff = None
 
     def __init__(self, *args, **kwargs):
         """ """
@@ -84,7 +85,7 @@ class test_basemodel(unittest.TestCase):
         """ """
         n = {'Name': 'test'}
         new = self.value(**n)
-        self.assertTrue("Name" in new.__dict__)
+        self.assertEqual(new.Name, 'test')
 
     def test_id(self):
         """ """
