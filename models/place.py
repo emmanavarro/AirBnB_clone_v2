@@ -83,7 +83,7 @@ class Place(BaseModel, Base):
                 if self.amenity_ids == value.id:
                     list_amen.append(value)
             return list_amen """
-        return self.amenity_ids
+            return self.amenity_ids
 
         @amenities.setter
         def amenities(self, obj):
