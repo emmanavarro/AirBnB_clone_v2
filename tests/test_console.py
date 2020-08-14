@@ -74,7 +74,7 @@ class ConsoleTestClass(unittest.TestCase):
                              test_cmd.getvalue())
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create User')
+            self.instan.onecmd('create State name="New_York"')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
@@ -108,7 +108,7 @@ class ConsoleTestClass(unittest.TestCase):
                              test_cmd.getvalue())
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
-            self.instan.onecmd('create User')
+            self.instan.onecmd('create State name="Texas"')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
