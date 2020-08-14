@@ -63,11 +63,11 @@ class test_basemodel(unittest.TestCase):
         """ """
         i = self.value()
         dictionary = {}
-        dictionary.update(i.__dict__)
+        dictionary.update(i.to_dict())
         if "_sa_instance_state" in dictionary:
             del dictionary["_sa_instance_state"]
-        self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         dictionary))
+        del dictionary["__class__"]  # new feature
+        self.assertTrue(type(str(i)) == str)
 
     def test_todict(self):
         """ """
