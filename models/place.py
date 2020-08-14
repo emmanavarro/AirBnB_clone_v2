@@ -10,16 +10,16 @@ from os import getenv
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
-            Column('place_id',
-                String(60),
-                ForeignKey('places.id'),
-                primary_key=True,
-                nullable=False),
-            Column('amenity_id',
-                String(60),
-                ForeignKey('amenities.id'),
-                primary_key=True,
-                nullable=False))
+                          Column('place_id',
+                                 String(60),
+                                 ForeignKey('places.id'),
+                                 primary_key=True,
+                                 nullable=False),
+                          Column('amenity_id',
+                                 String(60),
+                                 ForeignKey('amenities.id'),
+                                 primary_key=True,
+                                 nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -27,43 +27,41 @@ class Place(BaseModel, Base):
     __tablename__ = 'places'
 
     city_id = Column(String(60),
-            ForeignKey('cities.id'),
-            nullable=False)
+                     ForeignKey('cities.id'),
+                     nullable=False)
     user_id = Column(String(60),
-            ForeignKey('users.id'),
-            nullable=False)
+                     ForeignKey('users.id'),
+                     nullable=False)
     name = Column(String(60),
-            nullable=False)
+                  nullable=False)
     description = Column(String(1024),
-            nullable=True)
+                         nullable=True)
     number_rooms = Column(Integer,
-            nullable=False,
-            default=0)
+                          nullable=False,
+                          default=0)
     number_bathrooms = Column(Integer,
-            nullable=False,
-            default=0)
+                              nullable=False,
+                              default=0)
     max_guest = Column(Integer,
-            nullable=False,
-            default=0)
+                       nullable=False,
+                       default=0)
     price_by_night = Column(Integer,
-            nullable=False,
-            default=0)
+                            nullable=False,
+                            default=0)
     latitude = Column(Float,
-            nullable=True)
+                      nullable=True)
     longitude = Column(Float,
-            nullable=True)
+                       nullable=True)
     amenity_ids = []
-
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         # DBStorage
         reviews = relationship("Review",
-                backref='place',
-                cascade='all, delete')
+                               backref='place',
+                               cascade='all, delete')
         amenities = relationship("Amenity",
-                secondary=place_amenity,
-                viewonly=False)
-
+                                 secondary=place_amenity,
+                                 viewonly=False)
     else:
         # FileStorage
         @property
@@ -85,7 +83,7 @@ class Place(BaseModel, Base):
                 if self.amenity_ids == value.id:
                     list_amen.append(value)
             return list_amen """
-            return self.amenity_ids
+        return self.amenity_ids
 
         @amenities.setter
         def amenities(self, obj):
