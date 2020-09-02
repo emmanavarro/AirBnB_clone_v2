@@ -52,6 +52,8 @@ h4 {
     margin-top: 18px;
     padding: 10%;
     display: none;
+    overflow: auto;
+    max-height: 300px;
 }
 .popover h2 {
     font-size: 16px;
@@ -59,8 +61,7 @@ h4 {
     margin-bottom: 5px;
 }
 .popover ul {
-    overflow: auto;
-    max-height: 300px;
+    list-style-type: none;
 }
 .popover li {
     list-style-type: none;
