@@ -41,7 +41,7 @@ def states_id(id):
             flag = 1
             states = state
             break
-    return render_template('9-states.py', states=states, flag=flag)
+    return render_template('9-states.html', states=states, flag=flag)
 
 
 @app.teardown_appcontext
