@@ -33,21 +33,22 @@ button:hover {
 }
 .locations h3, .amenities h3{
     font-weight: 600;
-    margin: inherit;
     margin-top: 15px;
+    margin-left: 30px;
 }
 h4 {
     font-weight: 400;
     font-size: 14px;
-    margin: inherit;
     margin-top: 2px;
+    margin-left: 5px;
+    margin: inherit;
 }
 .popover {
     background-color: #FAFAFA;
     border: 1px #DDDDDD solid;
     border-radius: 4px;
-    margin-top: 14px;
-    padding: 10%;
+    margin-top: 4px;
+    padding: 5px;
     display: none;
     overflow: auto;
     max-height: 300px;
@@ -56,16 +57,21 @@ h4 {
     display: none;
 }
 .popover h2 {
-    font-size: 16px;
-    margin-bottom: 5px;
-    margin-top: 15px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-left: -5px;
 }
-.popover ul {
-    list-style-type: none;
+.locations .popover li {
+    margin-left: -20px;
 }
-.popover li {
+.amenities .popover li {
+    margin-left: -5px;
+}
+.popover li, .popover ul {
     list-style-type: none;
-    margin: 10px 10px;
+    margin-top: 5px;
+    margin-left: -5px;
 }
 .locations:hover .popover, .amenities:hover .popover {
     display: block;
