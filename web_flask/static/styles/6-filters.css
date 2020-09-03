@@ -24,7 +24,6 @@ button:hover {
 .locations, .amenities {
     height: 100%;
     width: 25%;
-    margin: 0px;
     float: left;
     position: relative;
 }
@@ -36,20 +35,18 @@ button:hover {
     font-weight: 600;
     margin: inherit;
     margin-top: 15px;
-    margin-left: 50px;
 }
 h4 {
     font-weight: 400;
     font-size: 14px;
     margin: inherit;
     margin-top: 2px;
-    margin-left: 50px;
 }
 .popover {
     background-color: #FAFAFA;
     border: 1px #DDDDDD solid;
     border-radius: 4px;
-    margin-top: 18px;
+    margin-top: 14px;
     padding: 10%;
     display: none;
     overflow: auto;
@@ -60,16 +57,15 @@ h4 {
 }
 .popover h2 {
     font-size: 16px;
-    margin-top: 10px;
     margin-bottom: 5px;
+    margin-top: 15px;
 }
 .popover ul {
     list-style-type: none;
 }
 .popover li {
     list-style-type: none;
-    margin-bottom: 5px;
-    padding-left: 10px;
+    margin: 10px 10px;
 }
 .locations:hover .popover, .amenities:hover .popover {
     display: block;
